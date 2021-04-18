@@ -15,9 +15,9 @@ namespace AYKA.AnonymousFunction
     {
         [FunctionName("AZDSAnonymousFunction")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "AZDSAnonymousFunction/{category:alpha}/{id:int?}")] HttpRequest req,
-             string category, int? id,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "AZDSAnonymousFunction/{category}/{id}")] HttpRequest req,
+
+            ILogger log, string category, int? id)
         {
             log.LogInformation("#################### ANONYMOUS LEVEL AUTHORIZATION FUNCTION #############################");
             log.LogInformation("C# HTTP trigger function processed a request.");
