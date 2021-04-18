@@ -34,7 +34,7 @@ namespace AYKA.AZDSAdminLevelAuth
         {
 
             log.LogInformation("####################ADMIN LEVEL AUTHORIZATION FUNCTION#############################");
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            log.LogInformation("ADMIN C# HTTP trigger function processed a request.");
             DateTime start = DateTime.UtcNow;
 
 
@@ -58,8 +58,8 @@ namespace AYKA.AZDSAdminLevelAuth
             name = name ?? data?.name;
 
             string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+                ? "Azure Function Triggered Successfully. Pass a name in the query string or in the request body for a personalized response."
+                : $"Hola! {name}. Azure Function Triggered Successfully.";
 
             var evt = new EventTelemetry("Function called");
             evt.Context.User.Id = name;
