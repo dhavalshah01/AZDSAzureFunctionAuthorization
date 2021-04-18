@@ -15,10 +15,11 @@ namespace AYKA.AnonymousFunction
     {
         [FunctionName("AZDSAnonymousFunction")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "AZDSAnonymousFunction/{category:alpha}/{id:int?}")] HttpRequest req,
+             string category, int? id,
             ILogger log)
         {
-log.LogInformation("#################### ANONYMOUS LEVEL AUTHORIZATION FUNCTION #############################");
+            log.LogInformation("#################### ANONYMOUS LEVEL AUTHORIZATION FUNCTION #############################");
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             var identity = req.HttpContext?.User?.Identity as ClaimsIdentity;
@@ -31,7 +32,8 @@ log.LogInformation("#################### ANONYMOUS LEVEL AUTHORIZATION FUNCTION 
                 log.LogInformation("Claim: {type} : {value}", claim.Type, claim.Value);
             }
             string name = req.Query["name"];
-
+            var message = String.Format($"Category: {category}, ID: {id}");
+            log.LogInformation("message " + message);
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
